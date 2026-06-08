@@ -1,0 +1,632 @@
+:root {
+  --paper: #f5f2e8;
+  --ink: #1d1712;
+  --blood: #661116;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #170d08;
+  color: var(--paper);
+  font-family: "Marker Felt", "Bradley Hand", "Comic Sans MS", cursive;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+.room {
+  position: relative;
+  min-height: 100svh;
+  width: 100vw;
+  overflow: hidden;
+  background: #170d08 url("assets/Background.jpeg") center center / cover no-repeat;
+  isolation: isolate;
+}
+
+.room::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 96%, rgba(255, 255, 255, 0.16), transparent 2.5%),
+    radial-gradient(circle at 96% 96%, rgba(255, 255, 255, 0.16), transparent 1.6%),
+    linear-gradient(90deg, rgba(35, 14, 7, 0.8), transparent 10%, transparent 88%, rgba(35, 14, 7, 0.9)),
+    radial-gradient(ellipse at center, transparent 48%, rgba(0, 0, 0, 0.46) 100%);
+  mix-blend-mode: multiply;
+  z-index: 20;
+}
+
+.home-page .room::before {
+  display: none;
+}
+
+.paint-strip,
+.lace,
+.ceiling,
+.back-wall,
+.left-wall,
+.right-wall,
+.floor,
+.speckles {
+  display: none;
+}
+
+.paint-strip {
+  position: absolute;
+  top: 2.3%;
+  left: -1.5%;
+  width: 103%;
+  height: 9.2%;
+  background: #5b2308;
+  border-top: 10px solid #050505;
+  border-bottom: 10px solid #050505;
+  clip-path: polygon(0 0, 11% 0, 14% 3%, 15% 17%, 15.3% 54%, 14.5% 67%, 23% 63%, 42% 58%, 58% 58%, 70% 62%, 86% 67%, 100% 64%, 100% 100%, 0 100%);
+  transform: rotate(-0.8deg);
+  z-index: 10;
+}
+
+.paint-strip::after {
+  content: "";
+  position: absolute;
+  inset: 6px 0 auto 14.4%;
+  height: 9px;
+  background: #020202;
+  transform: rotate(0.6deg);
+}
+
+.lace {
+  position: absolute;
+  top: 10.6%;
+  left: 0;
+  right: 0;
+  height: 15.7%;
+  z-index: 9;
+  opacity: 0.92;
+  filter: contrast(1.35) grayscale(0.7);
+  background:
+    radial-gradient(circle at 6% 58%, transparent 0 39px, rgba(236, 236, 226, 0.9) 40px 65px, transparent 66px),
+    radial-gradient(circle at 14% 10%, transparent 0 35px, rgba(236, 236, 226, 0.88) 36px 61px, transparent 62px),
+    radial-gradient(circle at 24% 54%, transparent 0 46px, rgba(236, 236, 226, 0.9) 47px 77px, transparent 78px),
+    radial-gradient(circle at 34% 12%, transparent 0 39px, rgba(236, 236, 226, 0.9) 40px 66px, transparent 67px),
+    radial-gradient(circle at 47% 57%, transparent 0 51px, rgba(236, 236, 226, 0.92) 52px 83px, transparent 84px),
+    radial-gradient(circle at 61% 8%, transparent 0 38px, rgba(236, 236, 226, 0.86) 39px 64px, transparent 65px),
+    radial-gradient(circle at 75% 56%, transparent 0 48px, rgba(236, 236, 226, 0.9) 49px 78px, transparent 79px),
+    radial-gradient(circle at 89% 14%, transparent 0 40px, rgba(236, 236, 226, 0.88) 41px 66px, transparent 67px),
+    repeating-radial-gradient(circle at 50% 0%, rgba(30, 30, 30, 0.36) 0 2px, transparent 3px 11px),
+    linear-gradient(180deg, #d8d9cf, #efeee4 39%, rgba(238, 238, 229, 0.86) 67%, transparent 68%);
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto, 145px 145px, auto;
+  clip-path: polygon(0 0, 100% 0, 100% 68%, 98% 63%, 96% 85%, 93% 66%, 90% 75%, 87% 61%, 84% 83%, 81% 65%, 78% 72%, 75% 57%, 71% 84%, 68% 63%, 64% 76%, 61% 58%, 57% 83%, 53% 63%, 49% 74%, 45% 58%, 41% 82%, 38% 61%, 34% 77%, 31% 60%, 27% 86%, 23% 64%, 20% 75%, 16% 59%, 13% 86%, 9% 66%, 6% 76%, 3% 63%, 0 75%);
+}
+
+.ceiling {
+  position: absolute;
+  top: 13%;
+  left: 2.5%;
+  width: 95%;
+  height: 33%;
+  background:
+    radial-gradient(ellipse at 51% 43%, rgba(255, 246, 207, 0.22), transparent 24%),
+    linear-gradient(180deg, #a98962, #b69570 57%, #8a6545);
+  clip-path: polygon(7% 0, 93% 0, 100% 79%, 76% 100%, 25% 98%, 0 78%);
+  box-shadow: inset 0 -12px 24px rgba(34, 13, 4, 0.4);
+  z-index: 1;
+}
+
+.fan {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  width: 15.5vw;
+  height: 13vw;
+  transform: translateX(-50%) rotate(3deg);
+  opacity: 0.82;
+}
+
+.fan span {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: 12vw;
+  height: 1.2vw;
+  transform-origin: left center;
+  border-radius: 60% 12% 12% 60%;
+  background: linear-gradient(90deg, #d6af6a, #b58039);
+  box-shadow: 0 2px 8px rgba(41, 19, 6, 0.35);
+}
+
+.fan span:nth-child(1) {
+  transform: rotate(6deg);
+}
+
+.fan span:nth-child(2) {
+  transform: rotate(95deg);
+}
+
+.fan span:nth-child(3) {
+  transform: rotate(184deg);
+}
+
+.fan span:nth-child(4) {
+  transform: rotate(273deg);
+}
+
+.fan i {
+  position: absolute;
+  top: 37%;
+  left: 45%;
+  width: 3.5vw;
+  height: 3.5vw;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 45% 68%, #fff7d9 0 20%, transparent 21%),
+    radial-gradient(circle at 72% 51%, #fff7d9 0 17%, transparent 18%),
+    #bd8b47;
+  box-shadow: 0 0 0 1.5vw rgba(150, 86, 36, 0.34);
+}
+
+.back-wall,
+.left-wall,
+.right-wall,
+.floor {
+  position: absolute;
+  z-index: 0;
+}
+
+.back-wall {
+  left: 14%;
+  right: 14%;
+  top: 31.8%;
+  height: 56%;
+  background:
+    repeating-linear-gradient(90deg, rgba(42, 17, 7, 0.34) 0 3px, transparent 4px 58px),
+    linear-gradient(90deg, #8b502b, #9d6236 16%, #89502b 62%, #77411f);
+  box-shadow: inset 0 0 44px rgba(28, 11, 4, 0.45);
+}
+
+.left-wall {
+  left: 0;
+  top: 23%;
+  width: 25%;
+  height: 67%;
+  clip-path: polygon(0 0, 100% 37%, 100% 100%, 0 100%);
+  background:
+    repeating-linear-gradient(89deg, rgba(39, 15, 6, 0.35) 0 2px, transparent 3px 44px),
+    linear-gradient(90deg, #6b371b, #8b4d28);
+}
+
+.right-wall {
+  right: 0;
+  top: 23%;
+  width: 25%;
+  height: 67%;
+  clip-path: polygon(0 37%, 100% 0, 100% 100%, 0 100%);
+  background:
+    repeating-linear-gradient(90deg, rgba(41, 15, 7, 0.36) 0 2px, transparent 3px 47px),
+    linear-gradient(90deg, #77401f, #5a2d17);
+}
+
+.window {
+  position: absolute;
+  top: 31%;
+  left: 30%;
+  width: 66%;
+  height: 28%;
+  transform: perspective(45vw) rotateY(-8deg);
+  border: 7px solid #4f2a18;
+  background: #e8f3ef;
+  box-shadow: 0 3px 18px rgba(12, 6, 3, 0.42);
+}
+
+.window span {
+  position: absolute;
+  background: rgba(63, 45, 33, 0.46);
+}
+
+.window span:nth-child(1),
+.window span:nth-child(2) {
+  width: 4px;
+  top: 0;
+  bottom: 0;
+}
+
+.window span:nth-child(1) {
+  left: 50%;
+}
+
+.window span:nth-child(2) {
+  display: none;
+}
+
+.window span:nth-child(3),
+.window span:nth-child(4) {
+  height: 4px;
+  left: 0;
+  right: 0;
+}
+
+.window span:nth-child(3) {
+  top: 51%;
+}
+
+.window span:nth-child(4) {
+  display: none;
+}
+
+.floor {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14.5%;
+  background:
+    radial-gradient(ellipse at 45% 15%, rgba(220, 220, 196, 0.13), transparent 31%),
+    linear-gradient(180deg, #4d4e43, #33382f);
+  clip-path: polygon(12% 0, 88% 0, 100% 100%, 0 100%);
+}
+
+.speckles {
+  position: absolute;
+  z-index: 12;
+  pointer-events: none;
+  opacity: 0.78;
+  filter: blur(0.3px);
+  background:
+    radial-gradient(circle at 12% 9%, var(--blood) 0 2px, transparent 3px),
+    radial-gradient(circle at 28% 66%, var(--blood) 0 3px, transparent 4px),
+    radial-gradient(circle at 45% 34%, var(--blood) 0 2px, transparent 3px),
+    radial-gradient(circle at 62% 78%, var(--blood) 0 2px, transparent 3px),
+    radial-gradient(circle at 83% 18%, var(--blood) 0 3px, transparent 4px),
+    radial-gradient(circle at 93% 51%, var(--blood) 0 2px, transparent 3px);
+  background-size: 52px 65px;
+}
+
+.speckles-left {
+  left: 0;
+  top: 19%;
+  width: 15%;
+  height: 56%;
+}
+
+.speckles-right {
+  right: 0;
+  top: 12%;
+  width: 13%;
+  height: 69%;
+}
+
+.speckles-bottom {
+  left: 0;
+  bottom: 0;
+  width: 36%;
+  height: 16%;
+}
+
+.polaroids {
+  position: absolute;
+  inset: 0;
+  z-index: 14;
+}
+
+.polaroid {
+  position: absolute;
+  display: block;
+  text-decoration: none;
+  filter: drop-shadow(0 12px 14px rgba(21, 8, 3, 0.38));
+  transition: transform 160ms ease, filter 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.polaroid:focus-visible {
+  outline: 4px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 8px;
+}
+
+.polaroid:hover {
+  filter: drop-shadow(0 17px 18px rgba(18, 7, 3, 0.5));
+}
+
+.home-page .polaroid {
+  filter: none;
+}
+
+.home-page .polaroid:hover {
+  filter: none;
+}
+
+.home-page .polaroid img,
+.home-page .fallback-card {
+  display: none;
+}
+
+.polaroid img,
+.fallback-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.polaroid img {
+  object-fit: contain;
+}
+
+.polaroid img[src] {
+  position: relative;
+  z-index: 2;
+}
+
+.polaroid img:not([complete]),
+.polaroid img[alt] {
+  font-size: 0;
+}
+
+.fallback-card {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 7.5% 7.5% 18%;
+  background: #f8f5ec;
+  box-shadow: inset 0 0 18px rgba(47, 35, 26, 0.16);
+}
+
+.fallback-card b {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: saturate(0.9) contrast(0.9);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.fallback-card em {
+  position: absolute;
+  left: 10%;
+  right: 7%;
+  bottom: 2%;
+  color: #2b221b;
+  font-size: clamp(23px, 4.4vw, 74px);
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+}
+
+.fallback-about b {
+  background:
+    radial-gradient(ellipse at 37% 50%, rgba(240, 255, 255, 0.72), rgba(205, 225, 221, 0.62) 27%, transparent 39%),
+    radial-gradient(circle at 54% 18%, #3d2a1f 0 10%, transparent 20%),
+    linear-gradient(90deg, rgba(223, 238, 236, 0.8), rgba(116, 76, 63, 0.62)),
+    #c7a18a;
+}
+
+.fallback-films b {
+  background:
+    radial-gradient(ellipse at 62% 41%, #d4d7c8 0 7%, transparent 14%),
+    radial-gradient(ellipse at 45% 41%, #e8e8de 0 7%, transparent 14%),
+    linear-gradient(110deg, #5b321f, #202123 48%, #8d4d31);
+}
+
+.fallback-writing b {
+  background:
+    radial-gradient(ellipse at 18% 26%, #87512b 0 21%, transparent 34%),
+    radial-gradient(ellipse at 58% 75%, #f8f2da 0 18%, transparent 24%),
+    linear-gradient(135deg, #dad4c6, #efe9d6);
+}
+
+.fallback-resume b {
+  background:
+    radial-gradient(ellipse at 61% 56%, #8a5031 0 17%, transparent 28%),
+    linear-gradient(180deg, #c8f2ee, #f8efc6 44%, #7a6843);
+}
+
+.polaroid-films {
+  left: 21.5%;
+  top: 47.5%;
+  width: 18.6%;
+  aspect-ratio: 0.757;
+  transform: rotate(-20deg);
+}
+
+.polaroid-films:hover {
+  transform: rotate(-18deg) translateY(-0.5vw);
+}
+
+.polaroid-about {
+  left: 36.2%;
+  top: 44.4%;
+  width: 21.2%;
+  aspect-ratio: 0.771;
+  transform: rotate(0deg);
+  z-index: 3;
+}
+
+.polaroid-about:hover {
+  transform: translateY(-0.45vw) scale(1.01);
+}
+
+.polaroid-writing {
+  left: 54.9%;
+  top: 47.2%;
+  width: 16.2%;
+  aspect-ratio: 0.757;
+  transform: rotate(-15deg);
+  z-index: 4;
+}
+
+.polaroid-writing:hover {
+  transform: rotate(-13deg) translateY(-0.45vw);
+}
+
+.polaroid-resume {
+  left: 59.5%;
+  top: 63.8%;
+  width: 15.2%;
+  aspect-ratio: 0.766;
+  transform: rotate(24deg);
+  z-index: 2;
+}
+
+.polaroid-resume:hover {
+  transform: rotate(22deg) translateY(-0.4vw);
+}
+
+.contact-link {
+  position: absolute;
+  left: 2.3%;
+  bottom: 2.7%;
+  z-index: 15;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-size: clamp(28px, 4.2vw, 84px);
+  line-height: 0.8;
+  letter-spacing: 0;
+  text-shadow:
+    2px 2px 0 rgba(0, 0, 0, 0.34),
+    -1px 1px 0 rgba(255, 255, 255, 0.2);
+  transform: rotate(-2deg);
+}
+
+.home-page .contact-link {
+  width: 17%;
+  height: 8%;
+  color: transparent;
+  text-shadow: none;
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+  color: #fff;
+}
+
+.content-page .room {
+  min-height: 100svh;
+}
+
+.page-panel {
+  position: relative;
+  z-index: 16;
+  width: min(740px, calc(100vw - 34px));
+  margin: 15svh auto 8svh;
+  padding: clamp(26px, 4vw, 54px);
+  color: #211711;
+  background: rgba(247, 242, 227, 0.94);
+  box-shadow: 0 16px 28px rgba(20, 7, 2, 0.45), inset 0 0 22px rgba(90, 62, 38, 0.14);
+  transform: rotate(-0.7deg);
+}
+
+.page-panel h1 {
+  margin: 0 0 18px;
+  font-size: clamp(46px, 8vw, 92px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.page-panel p,
+.page-panel li {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.5;
+}
+
+.page-panel p {
+  margin: 0 0 16px;
+}
+
+.page-panel ul {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.back-home {
+  display: inline-block;
+  margin-top: 22px;
+  color: #211711;
+  font-size: clamp(28px, 4vw, 48px);
+  text-decoration: none;
+}
+
+.back-home:hover,
+.back-home:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .room {
+    min-height: 100svh;
+  }
+
+  .paint-strip {
+    height: 8.5%;
+  }
+
+  .lace {
+    top: 9.7%;
+    height: 12%;
+  }
+
+  .ceiling {
+    top: 13%;
+    left: -26%;
+    width: 152%;
+    height: 25%;
+  }
+
+  .fan {
+    width: 26vw;
+    height: 23vw;
+  }
+
+  .back-wall {
+    left: 0;
+    right: 0;
+    top: 32%;
+    height: 58%;
+  }
+
+  .left-wall,
+  .right-wall {
+    opacity: 0.42;
+  }
+
+  .floor {
+    height: 19%;
+  }
+
+  .polaroid-about {
+    left: 30%;
+    top: 43%;
+    width: 48%;
+  }
+
+  .polaroid-films {
+    left: 11%;
+    top: 49%;
+    width: 34%;
+  }
+
+  .polaroid-writing {
+    left: 61%;
+    top: 48.5%;
+    width: 33%;
+  }
+
+  .polaroid-resume {
+    left: 61%;
+    top: 62%;
+    width: 30%;
+  }
+
+  .contact-link {
+    left: 4%;
+    bottom: 3%;
+  }
+}
