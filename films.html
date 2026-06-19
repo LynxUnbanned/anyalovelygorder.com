@@ -1,29 +1,431 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Films | Anya Gorder</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body class="content-page">
-    <main class="room">
-      <div class="paint-strip" aria-hidden="true"></div>
-      <div class="lace" aria-hidden="true"></div>
-      <div class="ceiling"><div class="fan" aria-hidden="true"><span></span><span></span><span></span><span></span><i></i></div></div>
-      <div class="back-wall" aria-hidden="true"></div>
-      <div class="left-wall" aria-hidden="true"></div>
-      <div class="right-wall" aria-hidden="true"><div class="window"><span></span><span></span><span></span><span></span></div></div>
-      <div class="floor" aria-hidden="true"></div>
-      <section class="page-panel">
-        <h1>Films</h1>
-        <ul>
-          <li>Short films and class projects</li>
-          <li>Directing, editing, cinematography, and production notes</li>
-          <li>Embedded reels or stills can be added here</li>
-        </ul>
-        <a class="back-home" href="index.html">Back</a>
-      </section>
-    </main>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Films | Anya Gorder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="cinematic-theme">
+  <nav class="cinematic-nav">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="films.html" class="active">FILMS</a>
+    <a href="writing.html">WRITING</a>
+    <a href="resume.html">RESUME</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+
+  <header class="cinematic-film-hero">
+    <video class="hero-video" autoplay loop muted playsinline>
+      <source src="assets/movies/second.mp4" type="video/mp4">
+    </video>
+    <div class="hero-film-overlay"></div>
+    <div class="hero-film-content">
+      <h1 class="film-title">CHRYSALISM</h1>
+      <p class="film-director">Directed by Anya Gorder</p>
+    </div>
+  </header>
+
+  <main class="cinematic-main">
+    <h3 class="section-title">FEATURED WORKS</h3>
+
+    <div class="accordion-gallery">
+      <div class="accordion-item" onclick="openModal('assets/movies/chrysalism%20full.mp4')">
+        <img src="assets/film_1.png" alt="Chrysalism" class="accordion-bg">
+        <div class="accordion-overlay"></div>
+        <div class="accordion-content">
+          <div class="vertical-title-wrapper">
+            <h2 class="vertical-title">CHRYSALISM</h2>
+            <p class="vertical-role">Director</p>
+          </div>
+          <div class="expanded-info">
+            <h3>CHRYSALISM</h3>
+            <p>A young woman steps out into the night for a simple errand, only to find the outside world growing
+              increasingly hostile as her sense of safety begins to fracture.
+
+            </p>
+            <span class="watch-btn">CLICK TO WATCH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item"
+        onclick="openModal('assets/movies/Curtain%20Call%20(ROUGH)%20-%20Jason%20David%20Cox%20(1080p).mp4')">
+        <img src="assets/film_3.png" alt="Curtain Call" class="accordion-bg">
+        <div class="accordion-overlay"></div>
+        <div class="accordion-content">
+          <div class="vertical-title-wrapper">
+            <h2 class="vertical-title">CURTAIN CALL</h2>
+            <p class="vertical-role">Writer</p>
+          </div>
+          <div class="expanded-info">
+            <h3>CURTAIN CALL</h3>
+            <p>Amidst the grandeur of a crowded opera house, a woman finds herself trapped in a deadly game of
+              cat-and-mouse with her tycoon husband.</p>
+            <span class="watch-btn">CLICK TO WATCH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item"
+        onclick="openModal('assets/movies/The%20Visitor%20(FINE)%20-%20Jason%20David%20Cox%20(1080p).mp4')">
+        <img src="assets/film_2.png" alt="The Visitor" class="accordion-bg">
+        <div class="accordion-overlay"></div>
+        <div class="accordion-content">
+          <div class="vertical-title-wrapper">
+            <h2 class="vertical-title">THE VISITOR</h2>
+            <p class="vertical-role">Writer</p>
+          </div>
+          <div class="expanded-info">
+            <h3>THE VISITOR</h3>
+            <p>In 1948, in Chicago’s underbelly, a weary low-life finds his evening upended by a desperate visitor.</p>
+            <span class="watch-btn">CLICK TO WATCH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="openModal('assets/movies/Beyond%20the%20Blue%20Dawn.mov')">
+        <img src="assets/film_5.png" alt="Beyond the Blue Dawn" class="accordion-bg">
+        <div class="accordion-overlay"></div>
+        <div class="accordion-content">
+          <div class="vertical-title-wrapper">
+            <h2 class="vertical-title">BEYOND THE BLUE DAWN</h2>
+            <p class="vertical-role">Director & Editor</p>
+          </div>
+          <div class="expanded-info">
+            <h3>BEYOND THE BLUE DAWN</h3>
+            <p>Awakening alone in a surreal afterlife, a woman must shed her earthly shroud to join those awaiting her.
+            </p>
+            <span class="watch-btn">CLICK TO WATCH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item"
+        onclick="openModal('assets/movies/Fashion%20In%20Business%20Through%20the%20Looking%20Glass%20-%20Teaser%20-%20marley%20huggins%20(1080p).mp4')">
+        <img src="assets/film_4.png" alt="Fashion in Business" class="accordion-bg">
+        <div class="accordion-overlay"></div>
+        <div class="accordion-content">
+          <div class="vertical-title-wrapper">
+            <h2 class="vertical-title">FASHION IN BUSINESS</h2>
+            <p class="vertical-role">Art Director</p>
+          </div>
+          <div class="expanded-info">
+            <h3>FASHION IN BUSINESS</h3>
+            <p>Comercial fashion shoot showcasing student designers.</p>
+            <span class="watch-btn">CLICK TO WATCH</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cinematic-footer">
+    <p>203-561-8079&nbsp;&nbsp; ANYA.GORDER@ICLOUD.COM</p>
+  </footer>
+
+  <div id="videoModal" class="video-modal">
+    <div class="modal-content" id="videoContainer">
+      <video id="modalVideo" playsinline>
+        <source src="" type="video/mp4">
+        Your browser does not support HTML video.
+      </video>
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+
+      <div id="videoControls" class="video-controls visible">
+        <button id="playPauseBtn" class="control-btn" title="Play/Pause">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" class="icon-play">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="time-display">
+          <span id="currentTime">00:00</span> / <span id="durationTime">00:00</span>
+        </div>
+
+        <button id="muteBtn" class="control-btn" title="Mute/Unmute">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" class="icon-volume">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+
+        <button id="fullscreenBtn" class="control-btn" title="Fullscreen">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" class="icon-fullscreen">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+            </path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="centerPlayIndicator" class="center-play-indicator"></div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('modalVideo');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const muteBtn = document.getElementById('muteBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationTimeEl = document.getElementById('durationTime');
+    const videoControls = document.getElementById('videoControls');
+    const centerPlayIndicator = document.getElementById('centerPlayIndicator');
+    const videoContainer = document.getElementById('videoContainer');
+
+    let hideControlsTimeout;
+    let isScrubbing = false;
+
+    function openModal(videoSrc) {
+      modal.style.display = 'flex';
+      videoPlayer.src = videoSrc;
+      videoPlayer.play();
+      updatePlayPauseIcon();
+      handleMouseMove();
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      videoPlayer.pause();
+      videoPlayer.currentTime = 0;
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    }
+
+    function togglePlay() {
+      if (videoPlayer.paused) {
+        videoPlayer.play();
+        showCenterIndicator('<svg viewBox="0 0 24 24" width="64" height="64" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>');
+      } else {
+        videoPlayer.pause();
+        showCenterIndicator('<svg viewBox="0 0 24 24" width="64" height="64" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>');
+      }
+      updatePlayPauseIcon();
+    }
+
+    function updatePlayPauseIcon() {
+      if (videoPlayer.paused) {
+        playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+      } else {
+        playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+      }
+    }
+
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "00:00";
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    function updateProgress() {
+      const percent = videoPlayer.duration ? (videoPlayer.currentTime / videoPlayer.duration) * 100 : 0;
+      progressBar.style.width = `${percent}%`;
+      currentTimeEl.textContent = formatTime(videoPlayer.currentTime);
+    }
+
+    function getScrubTime(clientX) {
+      const rect = progressContainer.getBoundingClientRect();
+      const scrubPercent = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      return scrubPercent * videoPlayer.duration;
+    }
+
+    function getClientX(e) {
+      if (typeof e.clientX === 'number') {
+        return e.clientX;
+      }
+
+      if (e.touches && e.touches.length) {
+        return e.touches[0].clientX;
+      }
+
+      if (e.changedTouches && e.changedTouches.length) {
+        return e.changedTouches[0].clientX;
+      }
+
+      return null;
+    }
+
+    function setProgress(clientX) {
+      if (!videoPlayer.duration || clientX === null) {
+        return;
+      }
+
+      const newTime = getScrubTime(clientX);
+      videoPlayer.currentTime = newTime;
+      updateProgress();
+    }
+
+    function beginScrub(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      isScrubbing = true;
+      if (typeof e.pointerId === 'number' && progressContainer.setPointerCapture) {
+        progressContainer.setPointerCapture(e.pointerId);
+      }
+      setProgress(getClientX(e));
+    }
+
+    function updateScrub(e) {
+      if (!isScrubbing) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      setProgress(getClientX(e));
+    }
+
+    function endScrub(e) {
+      if (!isScrubbing) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      isScrubbing = false;
+      setProgress(getClientX(e));
+
+      if (typeof e.pointerId === 'number' && progressContainer.hasPointerCapture && progressContainer.hasPointerCapture(e.pointerId)) {
+        progressContainer.releasePointerCapture(e.pointerId);
+      }
+    }
+
+    function toggleMute() {
+      videoPlayer.muted = !videoPlayer.muted;
+      if (videoPlayer.muted) {
+        muteBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>';
+      } else {
+        muteBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>';
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        videoContainer.requestFullscreen().catch(err => {
+          console.error(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function showCenterIndicator(svgHtml) {
+      centerPlayIndicator.innerHTML = svgHtml;
+      centerPlayIndicator.style.opacity = '1';
+      centerPlayIndicator.style.transform = 'translate(-50%, -50%) scale(1.2)';
+      setTimeout(() => {
+        centerPlayIndicator.style.opacity = '0';
+        centerPlayIndicator.style.transform = 'translate(-50%, -50%) scale(1)';
+      }, 500);
+    }
+
+    function handleMouseMove() {
+      videoControls.classList.add('visible');
+      videoContainer.style.cursor = 'default';
+      clearTimeout(hideControlsTimeout);
+      hideControlsTimeout = setTimeout(() => {
+        if (!videoPlayer.paused) {
+          videoControls.classList.remove('visible');
+          videoContainer.style.cursor = 'none';
+        }
+      }, 2500);
+    }
+
+    // Event Listeners
+    videoPlayer.addEventListener('click', togglePlay);
+    playPauseBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); });
+    videoPlayer.addEventListener('timeupdate', updateProgress);
+    videoPlayer.addEventListener('loadedmetadata', () => {
+      durationTimeEl.textContent = formatTime(videoPlayer.duration);
+    });
+    progressContainer.addEventListener('pointerdown', beginScrub);
+    progressContainer.addEventListener('pointermove', updateScrub);
+    progressContainer.addEventListener('pointerup', endScrub);
+    progressContainer.addEventListener('pointercancel', endScrub);
+    progressContainer.addEventListener('mousedown', beginScrub);
+    progressContainer.addEventListener('mousemove', updateScrub);
+    progressContainer.addEventListener('mouseup', endScrub);
+    progressContainer.addEventListener('mouseleave', endScrub);
+    progressContainer.addEventListener('touchstart', beginScrub, { passive: false });
+    progressContainer.addEventListener('touchmove', updateScrub, { passive: false });
+    progressContainer.addEventListener('touchend', endScrub, { passive: false });
+    progressContainer.addEventListener('touchcancel', endScrub, { passive: false });
+    progressContainer.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setProgress(getClientX(e));
+    });
+    videoControls.addEventListener('click', (e) => e.stopPropagation());
+    videoControls.addEventListener('pointerdown', (e) => e.stopPropagation());
+    muteBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMute(); });
+    fullscreenBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleFullscreen(); });
+
+    videoContainer.addEventListener('mousemove', handleMouseMove);
+    videoContainer.addEventListener('mouseleave', () => {
+      if (!videoPlayer.paused) {
+        videoControls.classList.remove('visible');
+      }
+    });
+    videoPlayer.addEventListener('play', () => {
+      updatePlayPauseIcon();
+      handleMouseMove();
+    });
+    videoPlayer.addEventListener('pause', () => {
+      updatePlayPauseIcon();
+      videoControls.classList.add('visible');
+      videoContainer.style.cursor = 'default';
+      clearTimeout(hideControlsTimeout);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === "Escape") {
+        closeModal();
+      } else if (event.key === " ") {
+        if (modal.style.display === 'flex') {
+          event.preventDefault();
+          togglePlay();
+        }
+      }
+    });
+
+    // Auto-play modal based on query string
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const playFilm = urlParams.get('play');
+      if (playFilm) {
+        const movies = {
+          'chrysalism': 'assets/movies/chrysalism%20full.mp4',
+          'visitor': 'assets/movies/The%20Visitor%20(FINE)%20-%20Jason%20David%20Cox%20(1080p).mp4',
+          'curtain': 'assets/movies/Curtain%20Call%20(ROUGH)%20-%20Jason%20David%20Cox%20(1080p).mp4',
+          'fashion': 'assets/movies/Fashion%20In%20Business%20Through%20the%20Looking%20Glass%20-%20Teaser%20-%20marley%20huggins%20(1080p).mp4',
+          'beyond': 'assets/movies/Beyond%20the%20Blue%20Dawn.mov'
+        };
+
+        if (movies[playFilm]) {
+          // Slight delay to ensure video container is ready and overlay removed
+          setTimeout(() => {
+            openModal(movies[playFilm]);
+          }, 100);
+        }
+      }
+    });
+  </script>
+  <script src="film-effects.js"></script>
+</body>
+
 </html>

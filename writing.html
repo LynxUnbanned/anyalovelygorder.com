@@ -6,21 +6,78 @@
     <title>Writing | Anya Gorder</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body class="content-page">
-    <main class="room">
-      <div class="paint-strip" aria-hidden="true"></div>
-      <div class="lace" aria-hidden="true"></div>
-      <div class="ceiling"><div class="fan" aria-hidden="true"><span></span><span></span><span></span><span></span><i></i></div></div>
-      <div class="back-wall" aria-hidden="true"></div>
-      <div class="left-wall" aria-hidden="true"></div>
-      <div class="right-wall" aria-hidden="true"><div class="window"><span></span><span></span><span></span><span></span></div></div>
-      <div class="floor" aria-hidden="true"></div>
-      <section class="page-panel">
-        <h1>Writing</h1>
-        <p>Screenplays, essays, treatments, and other written work can live here.</p>
-        <p>Add project excerpts, loglines, PDF links, or contact instructions for private samples.</p>
-        <a class="back-home" href="index.html">Back</a>
-      </section>
+  <body class="cinematic-theme">
+    <nav class="cinematic-nav">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="films.html">FILMS</a>
+      <a href="writing.html" class="active">WRITING</a>
+      <a href="resume.html">RESUME</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+    
+    <main class="cinematic-main writing-main">
+      <div class="writing-container">
+        <h1 class="section-title">SCREENPLAYS</h1>
+        <p class="writing-intro">Select excerpts from feature and short film scripts.</p>
+
+        <div class="script-list">
+          <!-- SCRIPT CARD 1 -->
+          <div class="script-card">
+            <div class="script-header">
+              <div class="script-info">
+                <span class="script-format">Television Pilot</span>
+                <h2 class="script-title">THE PRODIGY</h2>
+                <p class="script-logline">A cunning teen’s plan to take revenge on his little sister’s tormentors leads to an accidental killing—awakening a dark, insatiable hunger that pushes him down a dangerous path.</p>
+              </div>
+            </div>
+            <button class="script-bar-btn toggle-script-btn" onclick="window.open('reader.html?file=assets/screenplays/The%20Prodigy.pdf', '_blank')">READ SCRIPT <span class="toggle-icon">↗</span></button>
+          </div>
+
+          <!-- SCRIPT CARD 2 -->
+          <div class="script-card">
+            <div class="script-header">
+              <div class="script-info">
+                <span class="script-format">Feature Film</span>
+                <h2 class="script-title">VESSEL</h2>
+                <p class="script-logline">In a devout Southern town, a frail young woman with prophetic visions must escape the grip of her controlling mother and a power-hungry preacher before fear and obsession destroy her.</p>
+              </div>
+            </div>
+            <button class="script-bar-btn toggle-script-btn" onclick="window.open('reader.html?file=assets/screenplays/Vessel%20Part%201.pdf', '_blank')">READ SCRIPT <span class="toggle-icon">↗</span></button>
+          </div>
+
+          <!-- SCRIPT CARD 3 -->
+          <div class="script-card">
+            <div class="script-header">
+              <div class="script-info">
+                <span class="script-format">Short Film</span>
+                <h2 class="script-title">CURTAIN CALL</h2>
+                <p class="script-logline">Amidst the grandeur of a crowded opera house, a woman finds herself trapped in a deadly game of cat-and-mouse with her tycoon husband.</p>
+              </div>
+            </div>
+            <button class="script-bar-btn toggle-script-btn" onclick="window.open('reader.html?file=assets/screenplays/Curtain%20Call%20-%20Shooting.pdf', '_blank')">READ SCRIPT <span class="toggle-icon">↗</span></button>
+          </div>
+
+          <!-- SCRIPT CARD 4 -->
+          <div class="script-card">
+            <div class="script-header">
+              <div class="script-info">
+                <span class="script-format">Short Film</span>
+                <h2 class="script-title">THE VISITOR</h2>
+                <p class="script-logline">In 1948, in Chicago’s underbelly, a weary low-life finds his evening upended by a desperate visitor.</p>
+              </div>
+            </div>
+            <button class="script-bar-btn toggle-script-btn" onclick="window.open('reader.html?file=assets/screenplays/The%20Visitor_Shooting%20Script.pdf', '_blank')">READ SCRIPT <span class="toggle-icon">↗</span></button>
+          </div>
+
+        </div>
+      </div>
     </main>
+
+    <footer class="cinematic-footer">
+      <p>203-561-8079&nbsp;&nbsp; ANYA.GORDER@ICLOUD.COM</p>
+    </footer>
+    
+    <script src="film-effects.js"></script>
   </body>
 </html>

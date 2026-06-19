@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Script Reader | Anya Gorder</title>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #1a1a1a;
+        overflow: hidden;
+      }
+
+      .pdf-filter-defs {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .viewer-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: #3f3f3f;
+        isolation: isolate;
+      }
+
+      .pdf-viewer {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: #3f3f3f;
+        /* Invert white PDF pages to black, then remap mid-greys to charcoal. */
+        filter: invert(1) url("#charcoal-pdf-filter");
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="pdf-filter-defs" aria-hidden="true" focusable="false" width="0" height="0">
+      <filter id="charcoal-pdf-filter" color-interpolation-filters="sRGB">
+        <feComponentTransfer>
+          <feFuncR type="gamma" amplitude="1" exponent="5" offset="0" />
+          <feFuncG type="gamma" amplitude="1" exponent="5" offset="0" />
+          <feFuncB type="gamma" amplitude="1" exponent="5" offset="0" />
+        </feComponentTransfer>
+      </filter>
+    </svg>
+    <div class="viewer-container">
+      <iframe id="pdf-frame" class="pdf-viewer" src=""></iframe>
+    </div>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const file = urlParams.get('file');
+      if (file) {
+        document.getElementById('pdf-frame').src = file;
+      } else {
+        document.body.innerHTML = '<h2 style="color:#c8922a; text-align:center; padding-top:20vh; font-family:sans-serif; letter-spacing: 2px;">NO SCRIPT SPECIFIED</h2>';
+      }
+    </script>
+  </body>
+</html>

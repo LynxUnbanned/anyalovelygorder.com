@@ -1,60 +1,60 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Anya Gorder</title>
-    <meta name="description" content="Portfolio website for film student Anya Gorder.">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body class="home-page">
-    <main class="room" aria-label="Anya Gorder portfolio">
-      <div class="paint-strip" aria-hidden="true"></div>
-      <div class="lace" aria-hidden="true"></div>
-      <div class="ceiling">
-        <div class="fan" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <i></i>
-        </div>
-      </div>
-      <div class="back-wall" aria-hidden="true"></div>
-      <div class="left-wall" aria-hidden="true"></div>
-      <div class="right-wall" aria-hidden="true">
-        <div class="window">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <div class="floor" aria-hidden="true"></div>
-      <div class="speckles speckles-left" aria-hidden="true"></div>
-      <div class="speckles speckles-right" aria-hidden="true"></div>
-      <div class="speckles speckles-bottom" aria-hidden="true"></div>
 
-      <nav class="polaroids" aria-label="Portfolio sections">
-        <a class="polaroid polaroid-films" href="films.html" aria-label="Films">
-          <img src="assets/Films.jpeg" alt="Films" onerror="this.style.display='none'">
-          <span class="fallback-card fallback-films"><b></b><em>Films</em></span>
-        </a>
-        <a class="polaroid polaroid-about" href="about.html" aria-label="About Me">
-          <img src="assets/About Me.jpeg" alt="About Me" onerror="this.style.display='none'">
-          <span class="fallback-card fallback-about"><b></b><em>About Me</em></span>
-        </a>
-        <a class="polaroid polaroid-writing" href="writing.html" aria-label="Writing">
-          <img src="assets/Writing.jpeg" alt="Writing" onerror="this.style.display='none'">
-          <span class="fallback-card fallback-writing"><b></b><em>Writing&hearts;</em></span>
-        </a>
-        <a class="polaroid polaroid-resume" href="resume.html" aria-label="Resume">
-          <img src="assets/Resume.jpeg" alt="Resume" onerror="this.style.display='none'">
-          <span class="fallback-card fallback-resume"><b></b><em>Resume</em></span>
-        </a>
-      </nav>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anya Gorder | Filmmaker</title>
+  <meta name="description" content="Portfolio website for filmmaker and writer Anya Gorder.">
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-      <a class="contact-link" href="contact.html">CONTACT</a>
-    </main>
-  </body>
+<body class="cinematic-theme">
+  <nav class="cinematic-nav home-nav">
+    <a href="index.html" class="active">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="films.html">FILMS</a>
+    <a href="writing.html">WRITING</a>
+    <a href="resume.html">RESUME</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+
+  <main class="cinematic-main home-main">
+    <div class="home-hero">
+      <div class="home-hero-bg">
+        <video autoplay loop muted playsinline id="bg-video">
+          <source src="assets/movies/chrysalism%20(2160p).mp4#t=12" type="video/mp4">
+        </video>
+      </div>
+      <div class="home-hero-content">
+        <h1 class="home-title">ANYA GORDER</h1>
+        <p class="home-subtitle">WRITER, DIRECTOR & FILMMAKER</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cinematic-footer home-footer">
+    <p>203-561-8079&nbsp;&nbsp; ANYA.GORDER@ICLOUD.COM</p>
+  </footer>
+
+  <script src="film-effects.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const bgVideo = document.getElementById('bg-video');
+      if (bgVideo) {
+        // Force start at 12s
+        bgVideo.currentTime = 12;
+
+        // Ensure it loops back to 12s instead of 0s
+        bgVideo.addEventListener('timeupdate', function () {
+          if (bgVideo.duration && bgVideo.currentTime >= bgVideo.duration - 0.5) {
+            bgVideo.currentTime = 12;
+            bgVideo.play();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
 </html>
