@@ -206,9 +206,13 @@ verify_http_reachability() {
 
   if [[ "$(curl -fsS --max-time 15 "http://$PRIMARY_DOMAIN/.well-known/acme-challenge/$token" || true)" != "$expected" ]]; then
     cat >&2 <<EOF
-$PRIMARY_DOMAIN is not reachable from the public internet on port 80.
+Warning: $PRIMARY_DOMAIN was not reachable from this server through its public URL.
 
-Open Oracle Cloud ingress before requesting the certificate:
+On Oracle Cloud this can be a false negative because the instance may not be able
+to loop back through its own public IP. Certbot will still run and perform the
+authoritative Let's Encrypt check from outside Oracle.
+
+If Certbot still fails with a timeout, open Oracle Cloud ingress:
   Source CIDR: 0.0.0.0/0
   IP Protocol: TCP
   Destination Port Range: 80
@@ -222,10 +226,9 @@ In Oracle Cloud Console, edit the VCN security list or network security group at
   cd $SOURCE_DIR
   sudo bash deploy.sh
 
-To skip this preflight after manually confirming access, run:
+To skip this warning after manually confirming access, run:
   sudo RUN_PUBLIC_HTTP_CHECK=0 bash deploy.sh
 EOF
-    exit 1
   fi
 }
 
