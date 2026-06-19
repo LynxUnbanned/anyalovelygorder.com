@@ -10,6 +10,7 @@ NGINX_LINK="/etc/nginx/sites-enabled/$DOMAIN"
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INCLUDE_WWW="${INCLUDE_WWW:-auto}"
 SKIP_CERT="${SKIP_CERT:-0}"
+RUN_PUBLIC_HTTP_CHECK="${RUN_PUBLIC_HTTP_CHECK:-1}"
 
 log() {
   printf '\n[%s] %s\n' "$(date +'%Y-%m-%d %H:%M:%S')" "$*"
@@ -54,7 +55,7 @@ build_domain_args() {
 }
 
 install_packages() {
-  log "Installing nginx, certbot, git-lfs, rsync, and firewall tooling"
+  log "Installing nginx, certbot, git-lfs, and rsync"
   export DEBIAN_FRONTEND=noninteractive
   apt-get update
   apt-get install -y --no-install-recommends \
@@ -65,8 +66,7 @@ install_packages() {
     git-lfs \
     nginx \
     python3-certbot-nginx \
-    rsync \
-    ufw
+    rsync
 }
 
 fetch_lfs_assets() {
@@ -95,9 +95,23 @@ configure_firewall() {
   if command -v ufw >/dev/null 2>&1; then
     log "Allowing SSH, HTTP, and HTTPS through ufw"
     ufw allow OpenSSH >/dev/null || true
-    ufw allow "Nginx Full" >/dev/null || true
+    ufw allow 80/tcp >/dev/null || true
+    ufw allow 443/tcp >/dev/null || true
     if ufw status | grep -q "Status: inactive"; then
       ufw --force enable >/dev/null || true
+    fi
+    return
+  fi
+
+  if command -v iptables >/dev/null 2>&1; then
+    log "Allowing HTTP and HTTPS through the local iptables firewall"
+    iptables -C INPUT -p tcp --dport 80 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+    iptables -C INPUT -p tcp --dport 443 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+
+    if command -v netfilter-persistent >/dev/null 2>&1; then
+      netfilter-persistent save >/dev/null || true
+    elif command -v iptables-save >/dev/null 2>&1 && [[ -d /etc/iptables ]]; then
+      iptables-save >/etc/iptables/rules.v4 || true
     fi
   fi
 }
@@ -130,6 +144,51 @@ EOF
   nginx -t
   systemctl enable nginx
   systemctl restart nginx
+}
+
+verify_http_reachability() {
+  if [[ "$SKIP_CERT" == "1" || "$RUN_PUBLIC_HTTP_CHECK" == "0" ]]; then
+    return
+  fi
+
+  log "Checking HTTP reachability before requesting the certificate"
+  local challenge_dir="$SITE_ROOT/.well-known/acme-challenge"
+  local token="deploy-preflight-$(date +%s)"
+  local expected="ok-$token"
+  local challenge_file="$challenge_dir/$token"
+  install -d -m 0755 "$challenge_dir"
+  printf '%s\n' "$expected" >"$challenge_file"
+  chown -R www-data:www-data "$SITE_ROOT/.well-known"
+  chmod 0644 "$challenge_file"
+
+  if [[ "$(curl -fsS --max-time 5 -H "Host: $PRIMARY_DOMAIN" "http://127.0.0.1/.well-known/acme-challenge/$token" || true)" != "$expected" ]]; then
+    echo "nginx is not serving the ACME challenge locally. Check: sudo systemctl status nginx" >&2
+    exit 1
+  fi
+
+  if [[ "$(curl -fsS --max-time 15 "http://$PRIMARY_DOMAIN/.well-known/acme-challenge/$token" || true)" != "$expected" ]]; then
+    cat >&2 <<EOF
+$PRIMARY_DOMAIN is not reachable from the public internet on port 80.
+
+Open Oracle Cloud ingress before requesting the certificate:
+  Source CIDR: 0.0.0.0/0
+  IP Protocol: TCP
+  Destination Port Range: 80
+
+Also open HTTPS for the finished site:
+  Source CIDR: 0.0.0.0/0
+  IP Protocol: TCP
+  Destination Port Range: 443
+
+In Oracle Cloud Console, edit the VCN security list or network security group attached to this instance's subnet/VNIC. Then rerun:
+  cd $SOURCE_DIR
+  sudo bash deploy.sh
+
+To skip this preflight after manually confirming access, run:
+  sudo RUN_PUBLIC_HTTP_CHECK=0 bash deploy.sh
+EOF
+    exit 1
+  fi
 }
 
 issue_certificate() {
@@ -274,6 +333,7 @@ main() {
   install_site_files
   configure_firewall
   write_bootstrap_nginx
+  verify_http_reachability
   issue_certificate
   write_final_nginx
   configure_auto_restart
