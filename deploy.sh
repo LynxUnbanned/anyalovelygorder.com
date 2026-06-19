@@ -100,13 +100,51 @@ configure_firewall() {
     if ufw status | grep -q "Status: inactive"; then
       ufw --force enable >/dev/null || true
     fi
-    return
   fi
 
   if command -v iptables >/dev/null 2>&1; then
     log "Allowing HTTP and HTTPS through the local iptables firewall"
-    iptables -C INPUT -p tcp --dport 80 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-    iptables -C INPUT -p tcp --dport 443 -j ACCEPT 2>/dev/null || iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+    install -m 0755 /dev/stdin /usr/local/sbin/anya-site-firewall <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+allow_port() {
+  local port="$1"
+  local reject_line
+
+  if iptables -C INPUT -p tcp --dport "$port" -j ACCEPT 2>/dev/null; then
+    return
+  fi
+
+  reject_line="$(iptables -L INPUT --line-numbers | awk '/REJECT/ { print $1; exit }')"
+  if [[ -n "$reject_line" ]]; then
+    iptables -I INPUT "$reject_line" -p tcp --dport "$port" -j ACCEPT
+  else
+    iptables -I INPUT -p tcp --dport "$port" -j ACCEPT
+  fi
+}
+
+allow_port 80
+allow_port 443
+EOF
+    /usr/local/sbin/anya-site-firewall
+
+    cat >/etc/systemd/system/anya-site-firewall.service <<'EOF'
+[Unit]
+Description=Allow HTTP and HTTPS before Oracle image firewall rejects
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/anya-site-firewall
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl enable anya-site-firewall.service >/dev/null || true
 
     if command -v netfilter-persistent >/dev/null 2>&1; then
       netfilter-persistent save >/dev/null || true
