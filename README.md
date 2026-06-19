@@ -9,12 +9,12 @@ Point the DNS `A` record for `anyalovelygorder.com` to the Oracle instance publi
 On the server:
 
 ```bash
-git clone <repo-url> anya-website
+git clone https://github.com/LynxUnbanned/anyalovelygorder.com.git anya-website
 cd anya-website
 sudo bash deploy.sh
 ```
 
-The deploy script installs nginx, certbot, rsync, and ufw; syncs the site to `/var/www/anyalovelygorder.com`; issues a Let's Encrypt certificate; configures HTTP to HTTPS redirects; enables nginx and certbot renewal; and adds a systemd restart policy for nginx.
+The deploy script installs nginx, certbot, git-lfs, rsync, and ufw; pulls Git LFS media assets; syncs the site to `/var/www/anyalovelygorder.com`; issues a Let's Encrypt certificate; configures HTTP to HTTPS redirects; enables nginx and certbot renewal; and adds a systemd restart policy for nginx.
 
 Useful overrides:
 

@@ -54,17 +54,27 @@ build_domain_args() {
 }
 
 install_packages() {
-  log "Installing nginx, certbot, rsync, and firewall tooling"
+  log "Installing nginx, certbot, git-lfs, rsync, and firewall tooling"
   export DEBIAN_FRONTEND=noninteractive
   apt-get update
   apt-get install -y --no-install-recommends \
     ca-certificates \
     certbot \
     curl \
+    git \
+    git-lfs \
     nginx \
     python3-certbot-nginx \
     rsync \
     ufw
+}
+
+fetch_lfs_assets() {
+  if git -C "$SOURCE_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    log "Fetching Git LFS assets"
+    git -C "$SOURCE_DIR" lfs install --local
+    git -C "$SOURCE_DIR" lfs pull
+  fi
 }
 
 install_site_files() {
@@ -260,6 +270,7 @@ main() {
   require_root
   build_domain_args
   install_packages
+  fetch_lfs_assets
   install_site_files
   configure_firewall
   write_bootstrap_nginx
