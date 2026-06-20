@@ -311,6 +311,8 @@ server {
         font/ttf ttf;
         font/woff woff;
         font/woff2 woff2;
+        application/vnd.apple.mpegurl m3u8;
+        video/mp2t ts;
         video/mp4 mp4;
         video/quicktime mov;
         video/webm webm;
@@ -327,6 +329,19 @@ server {
     }
 
     location ~* \.(?:mp4|mov|webm|pdf)$ {
+        expires 7d;
+        add_header Cache-Control "public";
+        add_header Accept-Ranges bytes;
+        try_files \$uri =404;
+    }
+
+    location ~* \.m3u8$ {
+        expires 5m;
+        add_header Cache-Control "public";
+        try_files \$uri =404;
+    }
+
+    location ~* \.ts$ {
         expires 7d;
         add_header Cache-Control "public";
         add_header Accept-Ranges bytes;

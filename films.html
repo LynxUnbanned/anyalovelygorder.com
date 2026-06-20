@@ -19,7 +19,9 @@
   </nav>
 
   <header class="cinematic-film-hero">
-    <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="assets/film_1.png">
+    <video class="hero-video" id="filmsHeroVideo" autoplay loop muted playsinline preload="metadata"
+      poster="assets/film_1.png" data-hls-src="assets/movies/hls/films-hero/master.m3u8"
+      data-fallback-src="assets/movies/web/films-hero-720.mp4">
       <source src="assets/movies/web/films-hero-720.mp4" type="video/mp4">
     </video>
     <div class="hero-film-overlay"></div>
@@ -33,7 +35,7 @@
     <h3 class="section-title">FEATURED WORKS</h3>
 
     <div class="accordion-gallery">
-      <div class="accordion-item" onclick="openModal('assets/movies/web/chrysalism-720.mp4')">
+      <div class="accordion-item" onclick="openModal('chrysalism')">
         <img src="assets/film_1.png" alt="Chrysalism" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -53,7 +55,7 @@
       </div>
 
       <div class="accordion-item"
-        onclick="openModal('assets/movies/web/curtain-call-720.mp4')">
+        onclick="openModal('curtain')">
         <img src="assets/film_3.png" alt="Curtain Call" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -71,7 +73,7 @@
       </div>
 
       <div class="accordion-item"
-        onclick="openModal('assets/movies/web/the-visitor-720.mp4')">
+        onclick="openModal('visitor')">
         <img src="assets/film_2.png" alt="The Visitor" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -87,7 +89,7 @@
         </div>
       </div>
 
-      <div class="accordion-item" onclick="openModal('assets/movies/web/beyond-blue-dawn-720.mp4')">
+      <div class="accordion-item" onclick="openModal('beyond')">
         <img src="assets/film_5.png" alt="Beyond the Blue Dawn" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -105,7 +107,7 @@
       </div>
 
       <div class="accordion-item"
-        onclick="openModal('assets/movies/web/fashion-business-720.mp4')">
+        onclick="openModal('fashion')">
         <img src="assets/film_4.png" alt="Fashion in Business" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -172,6 +174,8 @@
     </div>
   </div>
 
+  <script src="assets/vendor/hls.min.js"></script>
+  <script src="adaptive-video.js"></script>
   <script>
     const modal = document.getElementById('videoModal');
     const videoPlayer = document.getElementById('modalVideo');
@@ -185,14 +189,36 @@
     const videoControls = document.getElementById('videoControls');
     const centerPlayIndicator = document.getElementById('centerPlayIndicator');
     const videoContainer = document.getElementById('videoContainer');
+    const filmSources = {
+      chrysalism: {
+        hls: 'assets/movies/hls/chrysalism/master.m3u8',
+        fallback: 'assets/movies/web/chrysalism-720.mp4'
+      },
+      curtain: {
+        hls: 'assets/movies/hls/curtain-call/master.m3u8',
+        fallback: 'assets/movies/web/curtain-call-720.mp4'
+      },
+      visitor: {
+        hls: 'assets/movies/hls/the-visitor/master.m3u8',
+        fallback: 'assets/movies/web/the-visitor-720.mp4'
+      },
+      beyond: {
+        hls: 'assets/movies/hls/beyond-blue-dawn/master.m3u8',
+        fallback: 'assets/movies/web/beyond-blue-dawn-720.mp4'
+      },
+      fashion: {
+        hls: 'assets/movies/hls/fashion-business/master.m3u8',
+        fallback: 'assets/movies/web/fashion-business-720.mp4'
+      }
+    };
 
     let hideControlsTimeout;
     let isScrubbing = false;
 
-    function openModal(videoSrc) {
+    function openModal(filmKey) {
+      const source = filmSources[filmKey] || { fallback: filmKey };
       modal.style.display = 'flex';
-      videoPlayer.src = videoSrc;
-      videoPlayer.load();
+      window.attachAdaptiveVideo(videoPlayer, source.hls, source.fallback);
       videoPlayer.play().catch(() => {
         videoControls.classList.add('visible');
       });
@@ -204,6 +230,7 @@
       modal.style.display = 'none';
       videoPlayer.pause();
       videoPlayer.currentTime = 0;
+      window.detachAdaptiveVideo(videoPlayer);
       if (document.fullscreenElement) {
         document.exitFullscreen();
       }
@@ -408,15 +435,21 @@
 
     // Auto-play modal based on query string
     document.addEventListener('DOMContentLoaded', () => {
+      const heroVideo = document.getElementById('filmsHeroVideo');
+      if (heroVideo) {
+        window.attachAdaptiveVideo(heroVideo, heroVideo.dataset.hlsSrc, heroVideo.dataset.fallbackSrc);
+        heroVideo.play().catch(() => {});
+      }
+
       const urlParams = new URLSearchParams(window.location.search);
       const playFilm = urlParams.get('play');
       if (playFilm) {
         const movies = {
-          'chrysalism': 'assets/movies/web/chrysalism-720.mp4',
-          'visitor': 'assets/movies/web/the-visitor-720.mp4',
-          'curtain': 'assets/movies/web/curtain-call-720.mp4',
-          'fashion': 'assets/movies/web/fashion-business-720.mp4',
-          'beyond': 'assets/movies/web/beyond-blue-dawn-720.mp4'
+          'chrysalism': 'chrysalism',
+          'visitor': 'visitor',
+          'curtain': 'curtain',
+          'fashion': 'fashion',
+          'beyond': 'beyond'
         };
 
         if (movies[playFilm]) {
