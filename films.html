@@ -19,8 +19,8 @@
   </nav>
 
   <header class="cinematic-film-hero">
-    <video class="hero-video" autoplay loop muted playsinline>
-      <source src="assets/movies/second.mp4" type="video/mp4">
+    <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="assets/film_1.png">
+      <source src="assets/movies/web/films-hero-720.mp4" type="video/mp4">
     </video>
     <div class="hero-film-overlay"></div>
     <div class="hero-film-content">
@@ -33,7 +33,7 @@
     <h3 class="section-title">FEATURED WORKS</h3>
 
     <div class="accordion-gallery">
-      <div class="accordion-item" onclick="openModal('assets/movies/chrysalism%20full.mp4')">
+      <div class="accordion-item" onclick="openModal('assets/movies/web/chrysalism-720.mp4')">
         <img src="assets/film_1.png" alt="Chrysalism" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -53,7 +53,7 @@
       </div>
 
       <div class="accordion-item"
-        onclick="openModal('assets/movies/Curtain%20Call%20(ROUGH)%20-%20Jason%20David%20Cox%20(1080p).mp4')">
+        onclick="openModal('assets/movies/web/curtain-call-720.mp4')">
         <img src="assets/film_3.png" alt="Curtain Call" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -71,7 +71,7 @@
       </div>
 
       <div class="accordion-item"
-        onclick="openModal('assets/movies/The%20Visitor%20(FINE)%20-%20Jason%20David%20Cox%20(1080p).mp4')">
+        onclick="openModal('assets/movies/web/the-visitor-720.mp4')">
         <img src="assets/film_2.png" alt="The Visitor" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -87,7 +87,7 @@
         </div>
       </div>
 
-      <div class="accordion-item" onclick="openModal('assets/movies/Beyond%20the%20Blue%20Dawn.mov')">
+      <div class="accordion-item" onclick="openModal('assets/movies/web/beyond-blue-dawn-720.mp4')">
         <img src="assets/film_5.png" alt="Beyond the Blue Dawn" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -105,7 +105,7 @@
       </div>
 
       <div class="accordion-item"
-        onclick="openModal('assets/movies/Fashion%20In%20Business%20Through%20the%20Looking%20Glass%20-%20Teaser%20-%20marley%20huggins%20(1080p).mp4')">
+        onclick="openModal('assets/movies/web/fashion-business-720.mp4')">
         <img src="assets/film_4.png" alt="Fashion in Business" class="accordion-bg">
         <div class="accordion-overlay"></div>
         <div class="accordion-content">
@@ -129,7 +129,7 @@
 
   <div id="videoModal" class="video-modal">
     <div class="modal-content" id="videoContainer">
-      <video id="modalVideo" playsinline>
+      <video id="modalVideo" playsinline preload="metadata">
         <source src="" type="video/mp4">
         Your browser does not support HTML video.
       </video>
@@ -192,7 +192,10 @@
     function openModal(videoSrc) {
       modal.style.display = 'flex';
       videoPlayer.src = videoSrc;
-      videoPlayer.play();
+      videoPlayer.load();
+      videoPlayer.play().catch(() => {
+        videoControls.classList.add('visible');
+      });
       updatePlayPauseIcon();
       handleMouseMove();
     }
@@ -409,11 +412,11 @@
       const playFilm = urlParams.get('play');
       if (playFilm) {
         const movies = {
-          'chrysalism': 'assets/movies/chrysalism%20full.mp4',
-          'visitor': 'assets/movies/The%20Visitor%20(FINE)%20-%20Jason%20David%20Cox%20(1080p).mp4',
-          'curtain': 'assets/movies/Curtain%20Call%20(ROUGH)%20-%20Jason%20David%20Cox%20(1080p).mp4',
-          'fashion': 'assets/movies/Fashion%20In%20Business%20Through%20the%20Looking%20Glass%20-%20Teaser%20-%20marley%20huggins%20(1080p).mp4',
-          'beyond': 'assets/movies/Beyond%20the%20Blue%20Dawn.mov'
+          'chrysalism': 'assets/movies/web/chrysalism-720.mp4',
+          'visitor': 'assets/movies/web/the-visitor-720.mp4',
+          'curtain': 'assets/movies/web/curtain-call-720.mp4',
+          'fashion': 'assets/movies/web/fashion-business-720.mp4',
+          'beyond': 'assets/movies/web/beyond-blue-dawn-720.mp4'
         };
 
         if (movies[playFilm]) {

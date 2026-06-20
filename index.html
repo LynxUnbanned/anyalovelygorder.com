@@ -22,8 +22,8 @@
   <main class="cinematic-main home-main">
     <div class="home-hero">
       <div class="home-hero-bg">
-        <video autoplay loop muted playsinline id="bg-video">
-          <source src="assets/movies/chrysalism%20(2160p).mp4#t=12" type="video/mp4">
+        <video autoplay loop muted playsinline preload="metadata" id="bg-video">
+          <source src="assets/movies/web/home-hero-720.mp4" type="video/mp4">
         </video>
       </div>
       <div class="home-hero-content">
@@ -42,16 +42,7 @@
     document.addEventListener("DOMContentLoaded", function () {
       const bgVideo = document.getElementById('bg-video');
       if (bgVideo) {
-        // Force start at 12s
-        bgVideo.currentTime = 12;
-
-        // Ensure it loops back to 12s instead of 0s
-        bgVideo.addEventListener('timeupdate', function () {
-          if (bgVideo.duration && bgVideo.currentTime >= bgVideo.duration - 0.5) {
-            bgVideo.currentTime = 12;
-            bgVideo.play();
-          }
-        });
+        bgVideo.play().catch(() => {});
       }
     });
   </script>
