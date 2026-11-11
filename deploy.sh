@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 DOMAIN="${DOMAIN:-anyalovelygorder.com}"
 PRIMARY_DOMAIN="${PRIMARY_DOMAIN:-$DOMAIN}"
-CERTBOT_EMAIL="${CERTBOT_EMAIL:-anya.gorder@icloud.com}"
+CERTBOT_EMAIL="${CERTBOT_EMAIL:-anya.gorder@gmail.com}"
 SITE_ROOT="${SITE_ROOT:-/var/www/$DOMAIN}"
 NGINX_SITE="/etc/nginx/sites-available/$DOMAIN"
 NGINX_LINK="/etc/nginx/sites-enabled/$DOMAIN"
